@@ -1,0 +1,35 @@
+package firstTest;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
+import java.net.URL;
+import java.net.URLConnection;
+
+public class getLead {
+
+	public static void main(String[] args) {
+		try {	
+			ConfigLoader loader =  new ConfigLoader("soap.properties");
+	    	String SOAPMessageURL = loader.getData("SOAPMessageURL");
+	    	String marketoUserId = loader.getData("marketoUserId");
+	    	String marketoSecretKey = loader.getData("marketoSecretKey");
+	    	String proxyUri = loader.getData("proxyUri");
+	    	int proxyPort = Integer.parseInt(loader.getData("proxyPort"));
+	    	String proxyUsername = loader.getData("proxyUsername");
+	    	String proxyPassword = loader.getData("proxyPassword");
+			String urlStr="https://363-kzp-741.mktorest.com/rest/v1/lead/1.json?access_token=b9b2c14c-71cb-4c29-9334-143cdfd07ce3:ab";
+			httpRequest http = new httpRequest();
+			String response =httpRequest.httpGetProxy(urlStr,proxyUri,proxyPort,proxyUsername,proxyPassword);
+			System.out.println(response);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+}
